@@ -1,4 +1,4 @@
-//import styles from './FormattedTime.module.scss';
+import styles from './FormattedTime.module.scss';
 
 const FormattedTime = ({ time }) => {
     const formatTime = millseconds => {
@@ -17,7 +17,7 @@ const FormattedTime = ({ time }) => {
      <div className={styles.component}>
         {formatTime(time)}
      </div>
-   );
+  );
  
  };
 
