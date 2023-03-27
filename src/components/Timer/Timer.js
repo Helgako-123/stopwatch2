@@ -6,29 +6,42 @@ import styles from './Timer.module.scss';
 
 const Timer = () => {
   const [time, setTime] = useState(0)
-  const [run, setRun] = useState(false)
+  const [stop, setStop] = useState(false)
 
     useEffect(() => {
       let timer = null;
 
-      if(run) {
+      if(stop) {
         timer = setInterval(() =>{
-          setRun(prevValue => prevValue + 1)
-        }, 1)
+          setTime(prevValue => prevValue + 100)
+        }, 100)
       } else {
         clearInterval(timer);
       }
 
       return () =>
          clearInterval(timer)
-    }, [run])
+    }, [time, stop])
+
+    const startRun = () => {
+      setStop(true);
+    };
+    
+    const stopRun = () => {
+      setStop(false);
+    };
+    
+    const resetRun = () => {
+      setStop(false);
+      setTime(0);
+    };
   
   return ( 
     <div className={styles.container}>
      <FormattedTime time={time} />
-     <button className={styles.button} onClick={() => setRun(true)}>Start</button>
-     <button className={styles.button} onClick={() => setRun(false)}>Stop</button>
-     <button className={styles.button} onClick={() => setTime(0)}>Reset</button>
+     <button className={styles.button} onClick={() => startRun()}>Start</button>
+     <button className={styles.button} onClick={() => stopRun()}>Stop</button>
+     <button className={styles.button} onClick={() => resetRun()}>Reset</button>
     </div>
   );
 }
